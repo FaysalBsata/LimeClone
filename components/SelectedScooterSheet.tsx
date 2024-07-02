@@ -12,7 +12,7 @@ const SelectedScooterSheet = (props: Props) => {
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index);
   }, []);
-  const { selectedScooter, duration, distance } = useScooter();
+  const { selectedScooter, duration, distance, isNearby } = useScooter();
   useEffect(() => {
     if (selectedScooter) {
       bottomSheetRef.current?.expand();
@@ -20,6 +20,7 @@ const SelectedScooterSheet = (props: Props) => {
       bottomSheetRef.current?.close();
     }
   }, [selectedScooter]);
+
   return (
     <BottomSheet
       ref={bottomSheetRef}
@@ -35,7 +36,7 @@ const SelectedScooterSheet = (props: Props) => {
           <View style={{ flex: 1, gap: 5 }}>
             <Text style={{ color: 'white', fontSize: 20, fontWeight: '600' }}>Lime - S</Text>
             <Text style={{ color: 'gray', fontSize: 18 }}>
-              id-{selectedScooter.id} · Kind Abdullah Avenue
+              id-{selectedScooter?.id} · Kind Abdullah Avenue
             </Text>
           </View>
           <View style={{ gap: 5 }}>
@@ -67,7 +68,7 @@ const SelectedScooterSheet = (props: Props) => {
         </View>
         {/* Buttons */}
         <View>
-          <Button title="Start Journey" onPress={() => {}} />
+          <Button title="Start Journey" onPress={() => {}} disabled={!isNearby} />
         </View>
       </BottomSheetView>
     </BottomSheet>
