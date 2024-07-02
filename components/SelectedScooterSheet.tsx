@@ -24,14 +24,14 @@ const SelectedScooterSheet = (props: Props) => {
     <BottomSheet
       ref={bottomSheetRef}
       onChange={handleSheetChanges}
-      snapPoints={[200]}
+      snapPoints={[250]}
       enableDynamicSizing
       index={-1}
       backgroundStyle={{ backgroundColor: '#414442' }}
       enablePanDownToClose>
       <BottomSheetView style={{ flex: 1, padding: 10, gap: 20 }}>
         <View style={{ flexDirection: 'row', padding: 10, gap: 10, alignItems: 'center' }}>
-          <Image source={require('~/assets/scooter.png')} style={{ width: 60, height: 60 }} />
+          <Image source={require('~/assets/scooter.png')} style={{ width: 75, height: 75 }} />
           <View style={{ flex: 1, gap: 5 }}>
             <Text style={{ color: 'white', fontSize: 20, fontWeight: '600' }}>Lime - S</Text>
             <Text style={{ color: 'gray', fontSize: 18 }}>
