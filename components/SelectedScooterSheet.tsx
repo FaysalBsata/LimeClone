@@ -5,9 +5,7 @@ import { useScooter } from '~/providers/ScooterProvider';
 import { FontAwesome5, FontAwesome6 } from '@expo/vector-icons';
 import { Button } from './Button';
 
-type Props = {};
-
-const SelectedScooterSheet = (props: Props) => {
+const SelectedScooterSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index);
