@@ -56,22 +56,20 @@ export default function ScooterProvider({ children }: PropsWithChildren) {
       fetchDirections();
     }
   }, [selectedScooter]);
-  if (selectedScooter && direction) {
-    return (
-      <ScooterContext.Provider
-        value={{
-          selectedScooter,
-          setSelectedScooter,
-          direction,
-          directionCoordinates: direction?.routes?.[0]?.geometry?.coordinates,
-          duration: direction?.routes?.[0]?.duration,
-          distance: direction?.routes?.[0]?.distance,
-          isNearby,
-        }}>
-        {children}
-      </ScooterContext.Provider>
-    );
-  }
+  return (
+    <ScooterContext.Provider
+      value={{
+        selectedScooter,
+        setSelectedScooter,
+        direction,
+        directionCoordinates: direction?.routes?.[0]?.geometry?.coordinates,
+        duration: direction?.routes?.[0]?.duration,
+        distance: direction?.routes?.[0]?.distance,
+        isNearby,
+      }}>
+      {children}
+    </ScooterContext.Provider>
+  );
 }
 export function useScooter() {
   const context = useContext(ScooterContext);
