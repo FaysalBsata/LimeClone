@@ -2,6 +2,7 @@ export interface Scooter {
   id: number;
   lat: number;
   long: number;
+  battery: number;
 }
 export interface Route {
   routes: RouteElement[];

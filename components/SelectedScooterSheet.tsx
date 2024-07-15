@@ -7,9 +7,7 @@ import { Button } from './Button';
 
 const SelectedScooterSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
+
   const { selectedScooter, duration, distance, isNearby } = useScooter();
   useEffect(() => {
     if (selectedScooter) {
@@ -22,7 +20,6 @@ const SelectedScooterSheet = () => {
   return (
     <BottomSheet
       ref={bottomSheetRef}
-      onChange={handleSheetChanges}
       snapPoints={[250]}
       enableDynamicSizing
       index={-1}
