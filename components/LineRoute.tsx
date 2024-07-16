@@ -5,12 +5,13 @@ import { Position } from '@rnmapbox/maps/lib/typescript/src/types/Position';
 
 type Props = {
   coordinates: Position[];
+  id?: string;
 };
 
-const LineRoute = ({ coordinates }: Props) => {
+const LineRoute = ({ coordinates, id = 'routeSource' }: Props) => {
   return (
     <ShapeSource
-      id="routeSource"
+      id={id}
       lineMetrics
       shape={{
         properties: {},

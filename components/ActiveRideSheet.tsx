@@ -25,7 +25,7 @@ const ActiveRideSheet = (props: ActiveRideSheetProps) => {
       backgroundStyle={{ backgroundColor: '#414442' }}
       enablePanDownToClose>
       <BottomSheetView style={{ flex: 1, padding: 10, gap: 20 }}>
-        <Text>ActiveRideSheet</Text>
+        <Text style={{ color: 'white', fontSize: 20, fontWeight: '600' }}>Ride in progress</Text>
         <View>
           <Button
             title="Finish Journey"

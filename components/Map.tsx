@@ -9,12 +9,13 @@ const accessToken = process.env.EXPO_PUBLIC_MAPBOX_KEY || '';
 Mapbox.setAccessToken(accessToken);
 const Map = () => {
   const { directionCoordinates } = useScooter();
-  const { ride } = useRide();
+  const { ride, rideRoute } = useRide();
   const showMarkers = !ride;
   return (
     <MapView style={{ flex: 1 }} styleURL="mapbox://styles/mapbox/dark-v11">
       <Camera followUserLocation followZoomLevel={16} />
       <LocationPuck puckBearingEnabled puckBearing="heading" pulsing={{ isEnabled: true }} />
+      {rideRoute?.length > 0 && <LineRoute coordinates={rideRoute} id="rideRoute" />}
       {showMarkers && (
         <>
           <ScooterMarker />
