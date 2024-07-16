@@ -9,7 +9,7 @@ import { useRide } from '~/providers/RideProvider';
 const SelectedScooterSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const { startRide } = useRide();
-  const { selectedScooter, duration, distance, isNearby } = useScooter();
+  const { selectedScooter, duration, distance, isNearby, setSelectedScooter } = useScooter();
   useEffect(() => {
     if (selectedScooter) {
       bottomSheetRef.current?.expand();
@@ -17,13 +17,17 @@ const SelectedScooterSheet = () => {
       bottomSheetRef.current?.close();
     }
   }, [selectedScooter]);
-
+  const handleStartRide = () => {
+    startRide?.(selectedScooter!?.id);
+    setSelectedScooter(undefined);
+  };
   return (
     <BottomSheet
       ref={bottomSheetRef}
       snapPoints={[250]}
       enableDynamicSizing
       index={-1}
+      onClose={() => setSelectedScooter(undefined)}
       backgroundStyle={{ backgroundColor: '#414442' }}
       enablePanDownToClose>
       <BottomSheetView style={{ flex: 1, padding: 10, gap: 20 }}>
@@ -63,11 +67,7 @@ const SelectedScooterSheet = () => {
           </View>
         </View>
         <View>
-          <Button
-            title="Start Journey"
-            onPress={() => startRide?.(selectedScooter!?.id)}
-            disabled={!isNearby}
-          />
+          <Button title="Start Journey" onPress={handleStartRide} disabled={!isNearby} />
         </View>
       </BottomSheetView>
     </BottomSheet>
