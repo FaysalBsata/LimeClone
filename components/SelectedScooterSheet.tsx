@@ -1,13 +1,14 @@
-import { View, Text, Image } from 'react-native';
-import React, { useCallback, useEffect, useRef } from 'react';
+import { View, Text, Image, Alert } from 'react-native';
+import React, { useEffect, useRef } from 'react';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { useScooter } from '~/providers/ScooterProvider';
-import { FontAwesome5, FontAwesome6 } from '@expo/vector-icons';
+import { FontAwesome6 } from '@expo/vector-icons';
 import { Button } from './Button';
+import { useRide } from '~/providers/RideProvider';
 
 const SelectedScooterSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-
+  const { startRide } = useRide();
   const { selectedScooter, duration, distance, isNearby } = useScooter();
   useEffect(() => {
     if (selectedScooter) {
@@ -44,7 +45,7 @@ const SelectedScooterSheet = () => {
               }}>
               <FontAwesome6 name="flag-checkered" size={18} color="#42E100" />
               <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>
-                {(distance / 1000).toFixed(1)} km
+                {(distance! / 1000).toFixed(1)} km
               </Text>
             </View>
             <View
@@ -56,14 +57,17 @@ const SelectedScooterSheet = () => {
               }}>
               <FontAwesome6 name="clock" size={18} color="#42E100" />
               <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>
-                {(duration / 60).toFixed(0)} min
+                {(duration! / 60).toFixed(0)} min
               </Text>
             </View>
           </View>
         </View>
-        {/* Buttons */}
         <View>
-          <Button title="Start Journey" onPress={() => {}} disabled={!isNearby} />
+          <Button
+            title="Start Journey"
+            onPress={() => startRide(selectedScooter?.id)}
+            disabled={!isNearby}
+          />
         </View>
       </BottomSheetView>
     </BottomSheet>

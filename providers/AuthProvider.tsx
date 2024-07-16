@@ -5,6 +5,7 @@ import { supabase } from '~/lib/supabase';
 type AuthContextProps = {
   isAuthenticated: boolean;
   session?: Session | null;
+  userId?: string;
 };
 const AuthContext = createContext<AuthContextProps>({ isAuthenticated: false });
 export default function AuthProvider({ children }: PropsWithChildren) {
@@ -22,7 +23,8 @@ export default function AuthProvider({ children }: PropsWithChildren) {
   }, []);
   if (!isReady) return <ActivityIndicator />;
   return (
-    <AuthContext.Provider value={{ session, isAuthenticated: !!session?.user }}>
+    <AuthContext.Provider
+      value={{ session, isAuthenticated: !!session?.user, userId: session?.user.id }}>
       {children}
     </AuthContext.Provider>
   );
