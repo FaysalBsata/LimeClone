@@ -9,7 +9,7 @@ type RideContextProps = {
 };
 const RideContext = createContext<RideContextProps>({});
 export default function RideProvider({ children }: PropsWithChildren) {
-  const [ride, setRide] = useState();
+  const [ride, setRide] = useState<any>();
   const { userId } = useAuth();
   useEffect(() => {
     const fetchActiveRide = async () => {
@@ -18,6 +18,7 @@ export default function RideProvider({ children }: PropsWithChildren) {
         .select('*')
         .eq('user_id', userId)
         .is('finished_at', null)
+        .limit(1)
         .single();
       if (data) {
         setRide(data);
@@ -52,7 +53,6 @@ export default function RideProvider({ children }: PropsWithChildren) {
       setRide(undefined);
     }
   };
-  console.log('current ride', ride);
   return (
     <RideContext.Provider value={{ ride, startRide, finishRide }}>{children}</RideContext.Provider>
   );

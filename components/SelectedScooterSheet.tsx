@@ -65,7 +65,7 @@ const SelectedScooterSheet = () => {
         <View>
           <Button
             title="Start Journey"
-            onPress={() => startRide(selectedScooter?.id)}
+            onPress={() => startRide?.(selectedScooter!?.id)}
             disabled={!isNearby}
           />
         </View>

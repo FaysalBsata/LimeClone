@@ -30,7 +30,7 @@ const ActiveRideSheet = (props: ActiveRideSheetProps) => {
           <Button
             title="Finish Journey"
             onPress={() => {
-              finishRide();
+              finishRide?.();
             }}
           />
         </View>
