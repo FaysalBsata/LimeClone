@@ -28,7 +28,6 @@ const LineRoute = ({ coordinates, id = 'routeSource' }: Props) => {
           lineCap: 'round',
           lineJoin: 'round',
           lineWidth: 7,
-          lineDasharray: [1, 2],
         }}
       />
     </ShapeSource>

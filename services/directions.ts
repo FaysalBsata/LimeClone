@@ -8,12 +8,10 @@ export default async function getDirections(from: Position, to: Position) {
   const json = await response.json();
   return json;
 }
-export async function fetchDirectionBasedOnCoords(coordinates: [][]) {
-  const coordinatesString = coordinates
-    .map((coord: number[]) => `${coord[0]},${coord[1]}`)
-    .join(';');
+export async function fetchDirectionBasedOnCoords(coordinates: any) {
+  const coordinatesString = coordinates.map((coord: any) => `${coord[0]},${coord[1]}`).join(';');
   const response = await fetch(
-    `${BASE_URL}/matching/v5/mapbox/cycling/${coordinatesString}?annotations=distance%2Cduration&geometries=geojson&language=en&overview=full&steps=true&access_token=${process.env.EXPO_PUBLIC_MAPBOX_KEY}`
+    `${BASE_URL}/matching/v5/mapbox/cycling/${coordinatesString}?annotations=distance%2Cduration&geometries=geojson&overview=full&steps=false&access_token=${process.env.EXPO_PUBLIC_MAPBOX_KEY}`
   );
   const json = await response.json();
   return json;

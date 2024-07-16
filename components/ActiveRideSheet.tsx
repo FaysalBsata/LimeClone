@@ -10,6 +10,7 @@ const ActiveRideSheet = (props: ActiveRideSheetProps) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const { ride, finishRide } = useRide();
   useEffect(() => {
+    console.log(ride);
     if (ride) {
       bottomSheetRef.current?.expand();
     } else {

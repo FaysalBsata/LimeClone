@@ -14,7 +14,7 @@ type RideContextProps = {
 const RideContext = createContext<RideContextProps>({});
 export default function RideProvider({ children }: PropsWithChildren) {
   const [ride, setRide] = useState<any>();
-  const [rideRoute, setRideRoute] = useState<any>();
+  const [rideRoute, setRideRoute] = useState<any>([]);
   const { userId } = useAuth();
   useEffect(() => {
     const fetchActiveRide = async () => {
@@ -35,11 +35,11 @@ export default function RideProvider({ children }: PropsWithChildren) {
     let subscription: Location.LocationSubscription | undefined;
 
     const watchLocation = async () => {
-      subscription = await Location.watchPositionAsync({ distanceInterval: 100 }, (newLocation) => {
+      subscription = await Location.watchPositionAsync({ distanceInterval: 10 }, (newLocation) => {
         if (ride) {
           setRideRoute((prev: any) => [
             ...prev,
-            point([newLocation.coords.longitude, newLocation.coords.latitude]),
+            [newLocation?.coords?.longitude, newLocation?.coords?.latitude],
           ]);
         }
       });
@@ -63,6 +63,7 @@ export default function RideProvider({ children }: PropsWithChildren) {
         scooter_id: scooterId,
       })
       .select();
+    console.log(data);
     if (error) {
       Alert.alert('Error', error.message);
     } else {
